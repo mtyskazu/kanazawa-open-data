@@ -1,0 +1,186 @@
+/*******************************************************************************
+Slate Theme for GitHub Pages
+by mtyskazu
+ *******************************************************************************/
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+/*******************************************************************************
+Theme Styles
+ *******************************************************************************/
+body {
+	box-sizing: border-box;
+	color:#373737;
+	background: #f2f2f2;
+	-webkit-font-smoothing: antialiased;
+}
+/*******************************************************************************
+Full-Width Styles
+ *******************************************************************************/
+.outer {
+	width: 100%;
+}
+.inner {
+	position: relative;
+	max-width: 640px;
+	padding: 20px 10px;
+	margin: 0 auto;
+}
+/*******************************************************************************
+ * header
+ *******************************************************************************/
+#header_wrap {
+	background: #213;
+	background: -moz-linear-gradient(top, #fff, #213);
+	background: -webkit-linear-gradient(top, #fff, #213);
+	background: -ms-linear-gradient(top, #fff, #213);
+	background: -o-linear-gradient(top, #fff, #213);
+	background: linear-gradient(top, #fff, #213);
+}
+#header_wrap .inner {
+	padding: 5px;
+}
+#header_wrap img {
+	padding: 0;
+	max-width: none;
+	margin: 10px 10px 10px 0;
+	float: left;
+	box-shadow: 0 0 30px #ebebeb;
+	-webkit-box-shadow: 0 0 30px #ebebeb;
+	-moz-box-shadow: 0 0 30px #ebebeb;
+	-o-box-shadow: 0 0 30px #ebebeb;
+	-ms-box-shadow: 0 0 30px #ebebeb;
+}
+#header_wrap .title {
+	float: left;
+	color: white;
+	text-shadow: #111 0px 0px 10px;
+}
+#header_wrap .link {
+	float: right;
+	color: whitesmoke;
+}
+/*******************************************************************************
+ * sidebar 
+ *******************************************************************************/
+.sidebar-nav {
+	padding: 9px 0;	
+}
+/*******************************************************************************
+ * content 
+ *******************************************************************************/
+#main_content_wrap {
+	background: #f2f2f2;
+	padding-top: 20px;
+	/*border-top: 1px solid #111;*/
+	/*border-bottom: 1px solid #111;*/
+}
+#iframe_content{
+	width: 100%;
+}
+.carousel-caption {
+	position: static;	
+}	
+.item img {
+	/*position: relative;*/
+	display: block;
+	margin: 0 auto;
+	border: 1px solid #ebebeb;
+	/*box-shadow: 0 0 5px #ebebeb;*/
+	/*-webkit-box-shadow: 0 0 5px #ebebeb;*/
+	/*-moz-box-shadow: 0 0 5px #ebebeb;*/
+	/*-o-box-shadow: 0 0 5px #ebebeb;*/
+	/*-ms-box-shadow: 0 0 5px #ebebeb;*/
+}
+.maps {
+	height: 300px;
+	width : 400px;
+	display: block;
+	margin: 0 auto;
+	border: 1px solid #ebebeb;
+	/*padding-bottom: 300px;*/
+	/*background: white;*/
+	/*background: -moz-linear-gradient(top, black, white);*/
+	/*background: -webkit-linear-gradient(top, black, white);*/
+	/*background: -ms-linear-gradient(top, black, white);*/
+	/*background: -o-linear-gradient(top, black, white);*/
+	/*background: linear-gradient(top, black, white);*/
+}
+.btn-detail {
+	float: right;	
+	margin: 14px 0 0 0;
+}
+.collapse {
+	clear: both;
+	color: white;	
+	line-height: 20px;
+}
+/*******************************************************************************
+ * footer 
+ *******************************************************************************/
+#footer_wrap {
+	background: #f2f2f2;
+	padding: 10px 0;
+}
+#footer_wrap .inner {
+	padding: 0;
+	margin: 0 0 0 10px;
+}
+#footer_wrap p {
+	margin: 0 0 5px 0;
+	color: #000;
+}
+/*******************************************************************************
+Small Device Styles
+ *******************************************************************************/
+@media screen and (max-width: 480px) {
+	body {
+		font-size:14px;
+	}
+
+	#downloads {
+		display: none;
+	}
+
+	.inner {
+		min-width: 320px;
+		max-width: 480px;
+	}
+
+	#project_title {
+		font-size: 32px;
+	}
+
+	h1 {
+		font-size: 28px;
+	}
+
+	h2 {
+		font-size: 24px;
+	}
+
+	h3 {
+		font-size: 21px;
+	}
+
+	h4 {
+		font-size: 18px;
+	}
+
+	h5 {
+		font-size: 14px;
+	}
+
+	h6 {
+		font-size: 12px;
+	}
+
+	code, pre {
+		min-width: 320px;
+		max-width: 480px;
+		font-size: 11px;
+	}
+
+}
