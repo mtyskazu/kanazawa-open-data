@@ -32,35 +32,36 @@ Full-Width Styles
  * header
  *******************************************************************************/
 #header_wrap {
-	background: #213;
-	background: -moz-linear-gradient(top, #fff, #213);
-	background: -webkit-linear-gradient(top, #fff, #213);
-	background: -ms-linear-gradient(top, #fff, #213);
-	background: -o-linear-gradient(top, #fff, #213);
-	background: linear-gradient(top, #fff, #213);
+	background: #ffffff;
+	/*background: #213;*/
+	/*background: -moz-linear-gradient(top, #fff, #213);*/
+	/*background: -webkit-linear-gradient(top, #fff, #213);*/
+	/*background: -ms-linear-gradient(top, #fff, #213);*/
+	/*background: -o-linear-gradient(top, #fff, #213);*/
+	/*background: linear-gradient(top, #fff, #213);*/
 }
 #header_wrap .inner {
-	padding: 5px;
+	padding: 5px 0 0 0;
 }
 #header_wrap img {
-	padding: 0;
-	max-width: none;
-	margin: 10px 10px 10px 0;
+	width: 197px;
+	height: 126px; 
+	margin: 24px; 
 	float: left;
-	box-shadow: 0 0 30px #ebebeb;
-	-webkit-box-shadow: 0 0 30px #ebebeb;
-	-moz-box-shadow: 0 0 30px #ebebeb;
-	-o-box-shadow: 0 0 30px #ebebeb;
-	-ms-box-shadow: 0 0 30px #ebebeb;
+	/*box-shadow: 0 0 30px #ebebeb;*/
+	/*-webkit-box-shadow: 0 0 30px #ebebeb;*/
+	/*-moz-box-shadow: 0 0 30px #ebebeb;*/
+	/*-o-box-shadow: 0 0 30px #ebebeb;*/
+	/*-ms-box-shadow: 0 0 30px #ebebeb;*/
 }
 #header_wrap .title {
-	float: left;
-	color: white;
+	color: #111;
 	text-shadow: #111 0px 0px 10px;
 }
-#header_wrap .link {
-	float: right;
-	color: whitesmoke;
+#header_wrap .subject{
+	float: left;
+	margin: 0;
+	padding: 0;
 }
 /*******************************************************************************
  * sidebar 

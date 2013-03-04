@@ -29,7 +29,6 @@ function makeURL(site, path, params) {
 }
 
 function apiQuery(requestURL, callback) {
-
 	ajaxObj = $.ajax({
 		url: requestURL,
 		type: 'GET',
@@ -67,9 +66,10 @@ function genres() {
 		$.each(content, function(key, val) {
 			li += '<li><a href=\"'+val['id']+'\">'+val['name']+'</a></li>';
 		});
+		li += '<li class=\"nav-header\">map</li><li><a href=\"#\">地図</a></li>';
 		$('.nav.nav-list')[0].innerHTML = (li);
 		// active
-		$('.nav-header').next().attr('class', 'active');
+		$('.nav-header:first').next().attr('class', 'active');
 		// 
 		search($('.nav.nav-list .active a').attr('href'));
 	});
@@ -83,8 +83,11 @@ function genres_click() {
 		// change 'active'
 		$('.nav-list').children().removeClass('active');
 		$(this).parent().addClass('active');
-		// search	
-		search($(this).attr('href'));	
+		if ('地図'== $(this).text()) {
+			console.log('map clicked');
+		} else {
+			search($(this).attr('href'));	
+		}
 	});
 }
 
@@ -144,12 +147,12 @@ function detailDisplay(element, id) {
 	if ((undefined!= facilities[id].facility)&& (false== exist)) {
 		var data = facilities[id];
 		var text = 'email: '+data.facility.email+'<br/>'+	
+			'fee: '+data.facility.fee+'<br/>'+
 			'opening hours: '+data.facility.opening_hours+'<br/>'+
 			'closed days: '+data.facility.closed_days+'<br/>'+data.facility.summary;
 		element.append(text);
 		element.css('height', 'auto');
 		$('#'+id+' button').button('reset');
-		
 	}
 }
 
