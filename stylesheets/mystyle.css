@@ -109,6 +109,28 @@ Full-Width Styles
 	/*background: -o-linear-gradient(top, black, white);*/
 	/*background: linear-gradient(top, black, white);*/
 }
+#myMap {
+	display: none;
+	height: 560px;
+	margin: 0 auto;
+}
+#myMap img {
+	max-width: none;
+}
+.info-data {
+	width: 360px;
+}
+.info-data h1, .info-data h3 {
+	color: #C60;
+	font-size: 16px; 
+	padding-bottom: 0.5em; 
+	border-bottom: solid 1px #CCC; 
+	margin-bottom: 0.5em;
+}
+.info-data img { 
+	margin-left: 10px; 
+	float:right; 
+}
 .btn-detail {
 	float: right;	
 	margin: 14px 0 0 0;
@@ -117,6 +139,36 @@ Full-Width Styles
 	clear: both;
 	color: white;	
 	line-height: 20px;
+}
+.nav-list>li {
+	margin-bottom: -3px;
+}
+.nav-list>li>a {
+	padding: 10px 15px;
+	color: white;
+	text-shadow: none;
+	font-weight: bold;
+}
+.nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>li>a:hover {
+	margin-left: 0px;	
+	text-shadow: none;
+	/*-webkit-transform: scale(1.1);*/
+}
+#mapbtn {
+	width: 100%;
+	text-align: left;
+	color: #999;
+	font-weight: bold;
+	padding: 10px 15px;
+	background-color: transparent;
+	border: none;
+}
+#mapbtn:hover {
+	color: #FF2151;
+}
+#mapbtn.active {
+	color: #FF2151;
+	background-color: transparent;
 }
 /*******************************************************************************
  * footer 

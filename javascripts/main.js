@@ -2,6 +2,14 @@
 var ajaxObj;
 var facilityID;
 var facilities = [];
+var colorscheme = [
+'#ED6F62','#C1CC91','#24B287','#F2AC25','#F57A0B','#C6E070','#91C46C',
+'#287D7D','#1C344C','#43212E','#D9666F','#A9A688','#516057','#0C6BA1'
+];
+var customMarker = [
+"b-1.png","b-2.png","b-3.png","b-4.png","b-5.png","b-6.png","b-7.png",
+"b-8.png","b-9.png","b-10.png","b-11.png","b-12.png","b-13.png","b-14.png"
+];
 
 $(document).ready(function(){
 
@@ -9,6 +17,7 @@ $(document).ready(function(){
 	genres_click();	
 	items_click();
 	info_click();
+	map_click();
 });
 
 function makeURL(site, path, params) {
@@ -61,18 +70,30 @@ function genres() {
 	
 	apiQuery(makeURL(site, path, params), function(data) {
 		var content = data.genres;
-		// li nav-header
-		var li = '<li class=\"nav-header\">genres</li>';
+		var li=''; 
 		$.each(content, function(key, val) {
 			li += '<li><a href=\"'+val['id']+'\">'+val['name']+'</a></li>';
 		});
-		li += '<li class=\"nav-header\">map</li><li><a href=\"#\">地図</a></li>';
+		li += '<li style=\"margin: 0px -15px\"><button id=\"mapbtn\">MAP</button></li>';
+		// make list
 		$('.nav.nav-list')[0].innerHTML = (li);
+		// color scheme
+		genres_colorscheme();		 
 		// active
-		$('.nav-header:first').next().attr('class', 'active');
-		// 
+		$('.nav.nav-list li').first().attr('class', 'active');
 		search($('.nav.nav-list .active a').attr('href'));
 	});
+}
+
+function genres_colorscheme() {
+	var a = $('.nav.nav-list li a');
+	for(var i=0; i< a.length; i++) {
+		$(a[i]).css('background', colorscheme[i]);
+	}
+}
+
+function genre_active() {
+	return $('.nav-list li.active').index();	
 }
 
 function genres_click() {
@@ -81,14 +102,87 @@ function genres_click() {
 		// prevent page jump
 		event.preventDefault();
 		// change 'active'
-		$('.nav-list').children().removeClass('active');
+		$('.nav-list li.active').removeClass('active');
 		$(this).parent().addClass('active');
-		if ('地図'== $(this).text()) {
-			console.log('map clicked');
+		
+		if ($('.nav-list li button').hasClass('active')) {
+			map_search($(this).attr('href'), customMarker[genre_active()]);		
 		} else {
 			search($(this).attr('href'));	
 		}
 	});
+}
+
+function map_click() {
+
+	$(document).on('click', '.nav-list li button', function(event) {
+		// prevent page jump
+		event.preventDefault();
+		// change 'active'
+		if ($(this).hasClass('active')) {
+			$(this).removeClass('active');
+			map_display(false);
+			search($('.nav-list li.active a').attr('href'));	
+		} else {
+			$(this).addClass('active');
+			map_display(true);
+			map_search($('.nav-list li.active a').attr('href'), customMarker[genre_active()]);	
+		}
+	});
+}
+
+function map_display(onoff) {
+	
+	if (true== onoff) {
+		$('#myCarousel').carousel('pause');
+		slide_event_off();
+		$('#myMap').empty();
+		$('#myCarousel').css('display', 'none');
+		$('#myMap').css('display', 'block');
+	} else {
+		$('#myMap').css('display', 'none');
+		$('#myCarousel').css('display', 'block');
+	}
+}
+
+function map_search(genre, marker) {
+
+	var site = 'https://infra-api.city.kanazawa.ishikawa.jp/v1';
+	var path = ['facilities', 'search.json']; 
+	var params = {lang: 'ja', genre: genre, count: 50};
+	var url = makeURL(site, path, params);
+		
+	// ajax abort
+	ajaxObj.abort();
+	indicator($('.span9'), true);
+	
+	var array = new Array(); 
+	function mf(url) {
+			
+		apiQuery(url, function(data) {
+			$.each(data.facilities, function(key, val) {
+				var description = val.address+'<br>'+val.tel+'<br><a href=\"'+val.url+'\">'+val.url+'</a>';
+				var lookat = {latitude: val.coordinates.latitude, longitude: val.coordinates.longitude};
+				var placemark = { name: val.name, description: description, lookat: lookat, icon: 'customDot' };
+				array.push(placemark);
+			});
+			// next_page	
+			if (undefined!= data.next_page) {
+				mf(data.next_page);
+			// page finish
+			} else {
+				var placemarks = {placemarks: array};		
+				console.log(placemarks);
+				$('#myMap').GoogleMaps({
+					obj: placemarks,
+					data_type: 'json',
+					icon_path: 'images/'+marker	
+				});
+				indicator($('.span9'), false);
+			}
+		});
+	}
+	mf(url);
 }
 
 function search(genre) {
@@ -102,7 +196,7 @@ function search(genre) {
 	ajaxObj.abort();
 
 	// search initialise
-	$('.carousel').carousel('pause');
+	$('#myCarousel').carousel('pause');
 	$('.carousel-control').css('display', 'none');
 	indicator($('.span9'), true);
 	slide_event_off();
@@ -120,7 +214,10 @@ function search(genre) {
 			if (undefined!= data.next_page) {
 				facility(data.next_page);
 			} else {
-				$('.carousel').carousel('cycle');
+				$('#myCarousel').carousel({
+					interval: 3000,
+					pause: 'hover'
+				});
 				$('.carousel-control').css('display', 'inline');
 				indicator($('.span9'), false);
 				slide_event();
@@ -203,7 +300,8 @@ function map(id) {
 	if (mapElement.size()&& (0== mapElement.children().size())) {
 		if (undefined!= facilities[id].coordinates) {
 			mapElement.GoogleMaps({
-				icon_type: 'greenDot',
+				icon_type: 'customDot', 
+				icon_path: 'images/'+customMarker[genre_active()],
 				lat: facilities[id].coordinates.latitude, 
 				lng: facilities[id].coordinates.longitude, 
 				zoom: 15
@@ -214,19 +312,20 @@ function map(id) {
 
 function slide_event() {
 
-	$('.carousel').on('slide', function(event) {
+	$('#myCarousel').on('slide', function(event) {
 		if (undefined!= event.relatedTarget) {
 			facilityID = event.relatedTarget.id;
 		}
 	});
-	$('.carousel').on('slid', function(event) {
+	$('#myCarousel').on('slid', function(event) {
 		map(facilityID);
 	});
 }
 
 function slide_event_off() {
-	$('.carousel').off('slide');
-	$('.carousel').off('slid');
+
+	$('#myCarousel').off('slide');
+	$('#myCarousel').off('slid');
 }
 
 function indicator(element, value) {

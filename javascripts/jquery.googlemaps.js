@@ -28,8 +28,9 @@
 			var mapOpts;
 			var map_canvas;
 			var markers = [];
-			var singleMarkerMode = ( !opts.file ) ? true : false;
+			var singleMarkerMode = ( !opts.file&& !opts.obj ) ? true : false;
 			var file = opts.file;
+			var markerObj = opts.obj;
 			var dataType = ( opts.data_type ) ? opts.data_type : 'xml';
 			var infoWindowMode = ( opts.info_window == 1 || !singleMarkerMode ) ? true : false;
 			var html = ( singleMarkerMode ) ? opts.info_content : '';
@@ -39,6 +40,7 @@
 			var listTarget = opts.list_target;
 			var list_html;
 			var iconType = ( opts.icon_type ) ? opts.icon_type : '';
+			var iconPath = ( opts.icon_path ) ? opts.icon_path : '';
 			var icons = opts.icons;
 			
 			/* -------------------------------------------------------------------------
@@ -62,7 +64,11 @@
 						if( dataType == 'xml' ){
 							XMLAjaxLoad();
 						} else if( dataType == 'json' ) {
-							JSONPAjaxLoad();
+							if ( markerObj == null ) {
+								JSONPAjaxLoad();
+							} else {
+								JSONObjLoad();
+							}
 						}
 					}
 				};
@@ -89,7 +95,7 @@
 					var icon = ( custom_icon ) ? icons[ custom_icon ] : icons[ 'redDot' ];
 					var linkurl = ( url ) ? url : '#';
 					
-					var markerImg = icon.markerImg;
+					var markerImg = ( iconPath )? iconPath: icon.markerImg;
 					var markerSize = icon.markerSize;
 					var markerOrigin = icon.markerOrigin;
 					var markerAnchor = icon.markerAnchor;
@@ -232,6 +238,45 @@
 					});
 				}
 				
+				// JSONP Object Load
+				function JSONObjLoad() {
+					// Map Init
+					GoogleMapsLoad();
+
+					// For Bounds
+					var bounds = new google.maps.LatLngBounds();
+
+					// Loaded Data Setting
+					$.each( markerObj.placemarks, function(i){
+						var $obj = markerObj.placemarks[i];
+						console.log($obj);
+						
+						// Set Properties
+						latlng = new google.maps.LatLng(
+							parseFloat( $obj.lookat['latitude'] ),
+							parseFloat( $obj.lookat["longitude"] )
+							);
+						var name = $obj.name;
+						var description = $obj.description;
+						var url = $obj.url;
+						var custom_icon = $obj.icon;
+
+						// Set Info Window HTML
+						var html  = '<div class="' + opts.info_window_class + '">';
+						html += '<h' + opts.info_window_heading_level + '>' + name + '</h' + opts.info_window_heading_level + '>';
+						html += description;
+						html += '</div>';
+
+						// Create Marker
+						CreateMarker( map_canvas, latlng, custom_icon, html, name, url, i );
+
+						// Fit Baunds
+						bounds.extend( latlng );
+						map_canvas.fitBounds( bounds );
+						map_canvas.setCenter( bounds.getCenter() );
+					})
+				}
+
 		});
 		
 	};
@@ -256,6 +301,7 @@
 		
 		// PLACEMAKERS File PATH & Data Type
 		file: null,
+		markerObj: null,
 		data_type: null,
 		
 		// INFORMATION WINDOW
@@ -269,9 +315,23 @@
 		list_target: null,
 		
 		icon_type: null,
+		icon_path: null,
 		
 		// ICON / SHADOW IMG SETTING
 		icons :{
+			customDot: {
+				markerImg: '',
+				markerSize: new google.maps.Size( 19, 32 ),
+				markerOrigin: new google.maps.Point( 0, 0 ),
+				markerAnchor: new google.maps.Point( 9, 32 ),
+				markerScaleSize: new google.maps.Size( 19, 32 ),
+				shadowImg: 'http://maps.google.co.jp/mapfiles/ms/icons/msmarker.shadow.png',
+				shadowSize: new google.maps.Size( 59, 32 ),
+				shadowOrigin: new google.maps.Point( 0, 0 ),
+				shadowAnchor: new google.maps.Point( 16, 32 ),
+				shadowScaleSize: new google.maps.Size( 59, 32 )
+			},
+			
 			redDot: {
 				markerImg: 'http://maps.google.co.jp/mapfiles/ms/icons/red-dot.png',
 				markerSize: new google.maps.Size( 32, 32 ),
