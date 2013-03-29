@@ -15,6 +15,7 @@ body {
 	color:#373737;
 	background: #f2f2f2;
 	-webkit-font-smoothing: antialiased;
+	font-family: "Hiragino Mincho ProN",Georgia,"MS PMincho";
 }
 /*******************************************************************************
 Full-Width Styles
@@ -24,7 +25,7 @@ Full-Width Styles
 }
 .inner {
 	position: relative;
-	max-width: 640px;
+	max-width: 720px;
 	padding: 20px 10px;
 	margin: 0 auto;
 }
@@ -59,7 +60,7 @@ Full-Width Styles
 	text-shadow: #111 0px 0px 10px;
 }
 #header_wrap .subject{
-	float: left;
+	/*float: left;*/
 	margin: 0;
 	padding: 0;
 }
@@ -111,7 +112,7 @@ Full-Width Styles
 }
 #myMap {
 	display: none;
-	height: 560px;
+	height: 572px;
 	margin: 0 auto;
 }
 #myMap img {
@@ -141,7 +142,9 @@ Full-Width Styles
 	line-height: 20px;
 }
 .nav-list>li {
-	margin-bottom: -3px;
+	/*margin-bottom: -3px;*/
+	margin-bottom: 1px;
+	font-size: 1.2em;
 }
 .nav-list>li>a {
 	padding: 10px 15px;
