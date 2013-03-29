@@ -249,7 +249,6 @@
 					// Loaded Data Setting
 					$.each( markerObj.placemarks, function(i){
 						var $obj = markerObj.placemarks[i];
-						console.log($obj);
 						
 						// Set Properties
 						latlng = new google.maps.LatLng(
