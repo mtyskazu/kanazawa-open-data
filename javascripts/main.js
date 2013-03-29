@@ -172,7 +172,6 @@ function map_search(genre, marker) {
 			// page finish
 			} else {
 				var placemarks = {placemarks: array};		
-				console.log(placemarks);
 				$('#myMap').GoogleMaps({
 					obj: placemarks,
 					data_type: 'json',
@@ -196,7 +195,6 @@ function search(genre) {
 	ajaxObj.abort();
 
 	// search initialise
-	$('#myCarousel').carousel('pause');
 	$('.carousel-control').css('display', 'none');
 	indicator($('.span9'), true);
 	slide_event_off();
@@ -214,6 +212,7 @@ function search(genre) {
 			if (undefined!= data.next_page) {
 				facility(data.next_page);
 			} else {
+				$('#myCarousel').carousel('pause');
 				$('#myCarousel').carousel({
 					interval: 3000,
 					pause: 'hover'
