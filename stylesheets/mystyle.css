@@ -151,6 +151,7 @@ Full-Width Styles
 	color: white;
 	text-shadow: none;
 	font-weight: bold;
+	text-align: right;
 }
 .nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>li>a:hover {
 	margin-left: 0px;	
@@ -159,7 +160,7 @@ Full-Width Styles
 }
 #mapbtn {
 	width: 100%;
-	text-align: left;
+	text-align: right;
 	color: #999;
 	font-weight: bold;
 	padding: 10px 15px;
