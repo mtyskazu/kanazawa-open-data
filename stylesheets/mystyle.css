@@ -82,8 +82,22 @@ Full-Width Styles
 #iframe_content{
 	width: 100%;
 }
+.carousel {
+	width: 100%;
+	height: 480px;
+	margin-bottom: 0px;
+}
 .carousel-caption {
 	position: static;	
+	padding-bottom: 10px;
+}	
+.carousel-control {
+	top: 220px;
+	left: 0px;
+	margin: 0;
+}	
+.carousel-control.right {
+	right: 0px;
 }	
 .item img {
 	/*position: relative;*/
@@ -97,8 +111,12 @@ Full-Width Styles
 	/*-ms-box-shadow: 0 0 5px #ebebeb;*/
 }
 .maps {
-	height: 300px;
-	width : 400px;
+	/*large*/
+	/*height: 300px;*/
+	/*width : 400px;*/
+	/*huge*/
+	height: 480px;
+	width : 640px;
 	display: block;
 	margin: 0 auto;
 	border: 1px solid #ebebeb;

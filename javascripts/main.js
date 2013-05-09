@@ -258,7 +258,8 @@ function items(item) {
 
 	var img = '<div class=\"item\" id=\"'+item.id+'\">';
 	if (item.url) {
-		var url =  'http://capture.heartrails.com/large?'+encodeURIComponent(item.url);
+		//var url =  'http://capture.heartrails.com/large?'+encodeURIComponent(item.url);
+		var url =  'http://capture.heartrails.com/huge?'+encodeURIComponent(item.url);
 		img += '<a href=\"' + item.url + '\"><img src=\"'+url+'\"></a>';
 	} else {
 		img += '<div class="maps"></div>';
