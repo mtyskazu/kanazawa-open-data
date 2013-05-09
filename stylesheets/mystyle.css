@@ -111,10 +111,6 @@ Full-Width Styles
 	/*-ms-box-shadow: 0 0 5px #ebebeb;*/
 }
 .maps {
-	/*large*/
-	/*height: 300px;*/
-	/*width : 400px;*/
-	/*huge*/
 	height: 480px;
 	width : 640px;
 	display: block;
@@ -128,12 +124,7 @@ Full-Width Styles
 	/*background: -o-linear-gradient(top, black, white);*/
 	/*background: linear-gradient(top, black, white);*/
 }
-#myMap {
-	display: none;
-	height: 572px;
-	margin: 0 auto;
-}
-#myMap img {
+.maps img {
 	max-width: none;
 }
 .info-data {
